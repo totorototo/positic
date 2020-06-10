@@ -1,9 +1,16 @@
-export { Position, Elevation, Longitude, Latitude } from './types/position';
-
-export { PathAnalyst } from './types/pathAnalyst';
-
-export { Path } from './types/path';
+export {
+  Position,
+  Elevation,
+  Longitude,
+  Latitude,
+  PathAnalyst,
+  PositionAnalyst,
+  Path,
+  Area
+} from './types';
 
 export { calculateDistance } from './utils/helper';
+
+export { createPositionAnalyst } from './createPositionAnalyst';
 
 export { createPathAnalyst } from './createPathAnalyst';
