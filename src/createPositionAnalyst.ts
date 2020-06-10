@@ -1,4 +1,5 @@
 import { PositionAnalyst, Position, Area } from './types';
+import { calculateDistance } from './utils/helper';
 
 export const createPositionAnalyst = (position: Position): PositionAnalyst => {
   const isInArea = (area: Area): boolean => {
@@ -9,5 +10,13 @@ export const createPositionAnalyst = (position: Position): PositionAnalyst => {
       position[1] < area.maxLatitude
     );
   };
-  return { isInArea };
+
+  const isInRadius = (center: Position, radius: number): boolean => {
+    const distance = calculateDistance(center, position);
+    return distance - radius < 0;
+  };
+  const distanceFromPosition = (destination: Position): number => {
+    return calculateDistance(position, destination);
+  };
+  return { isInArea, isInRadius, distanceFromPosition };
 };
