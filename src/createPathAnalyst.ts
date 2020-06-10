@@ -1,16 +1,8 @@
-import { Position } from './types/position';
-import { PathAnalyst } from './types/pathAnalyst';
-import { Path } from './types/path';
+import { Position, PathAnalyst, Path, Area, PathElevation } from './types';
 import { calculateDistance } from './utils/helper';
 
 type Statistics = [number, number, number, number];
-type Elevation = { positive: number; negative: number };
-type Region = {
-  minLongitude: number;
-  maxLongitude: number;
-  minLatitude: number;
-  maxLatitude: number;
-};
+
 type Internals = {
   distance: number;
   gain: number;
@@ -64,7 +56,7 @@ export const createPathAnalyst = (path: Path): PathAnalyst => {
       0
     );
 
-  const calculatePathElevation = (smoothingFactor = 5): Elevation => {
+  const calculatePathElevation = (smoothingFactor = 5): PathElevation => {
     const elevations = path.map(position => position[2] || 0);
 
     // smooth array values (remove noise).
@@ -114,7 +106,7 @@ export const createPathAnalyst = (path: Path): PathAnalyst => {
     );
   };
 
-  const calculatePathBoundingBox = (): Region =>
+  const calculatePathBoundingBox = (): Area =>
     path.reduce(
       (region, position) => ({
         minLongitude:
