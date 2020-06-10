@@ -42,12 +42,7 @@ type PathAnalyst = {
   calculatePathElevation: (
     smoothingFactor?: number
   ) => { positive: number; negative: number };
-  calculatePathBoundingBox: () => {
-    minLongitude: number;
-    maxLongitude: number;
-    minLatitude: number;
-    maxLatitude: number;
-  };
+  calculatePathBoundingBox: () => Area;
   findClosestPosition: (currentLocation: Position) => Position;
 };
 ```
