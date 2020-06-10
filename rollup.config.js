@@ -27,7 +27,7 @@ export default [
   {
     input: 'src/index.ts',
     output: {
-      file: 'lib/neptunus.js',
+      file: 'lib/positic.js',
       format: 'cjs',
       indent: false
     },
@@ -54,7 +54,7 @@ export default [
   {
     input: 'src/index.ts',
     output: {
-      file: 'es/neptunus.js',
+      file: 'es/positic.js',
       format: 'es',
       indent: false
     },
@@ -84,7 +84,7 @@ export default [
   {
     input: 'src/index.ts',
     output: {
-      file: 'es/neptunus.mjs',
+      file: 'es/positic.mjs',
       format: 'es',
       indent: false
     },
@@ -115,9 +115,9 @@ export default [
   {
     input: 'src/index.ts',
     output: {
-      file: 'dist/neptunus.js',
+      file: 'dist/positic.js',
       format: 'umd',
-      name: 'neptunus',
+      name: 'positic',
       indent: false
     },
     plugins: [
@@ -139,9 +139,9 @@ export default [
   {
     input: 'src/index.ts',
     output: {
-      file: 'dist/neptunus.min.js',
+      file: 'dist/positic.min.js',
       format: 'umd',
-      name: 'neptunus',
+      name: 'positic',
       indent: false
     },
     plugins: [

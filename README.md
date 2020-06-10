@@ -1,16 +1,16 @@
-# neptunus
+# positic
 
-[![Build Status](https://travis-ci.org/totorototo/neptunus.svg?branch=master)](https://travis-ci.org/totorototo/neptunus)
+[![Build Status](https://travis-ci.org/totorototo/positic.svg?branch=master)](https://travis-ci.org/totorototo/positic)
 
 manipulate coordinates from [GeoJSON](http://geojson.org/).
 
 ## install
 
-    $ npm install --save neptunus
+    $ npm install --save positic
 
 or
 
-    $ yarn add neptunus
+    $ yarn add positic
 
 ## api
 
@@ -59,7 +59,7 @@ type PathAnalyst = {
 ### create path analyst
 
 ```js
-import { createAnalyst } = from "neptunus";
+import { createAnalyst } = from "positic";
 
 const path = [
   [5.77367, 45.07122, 279.608],
@@ -136,7 +136,7 @@ const closestPosition = analyst.findClosestPosition(PARIS);
 
 ## TypeScript
 
-neptunus includes [TypeScript](http://typescriptlang.org) definitions.
+positic includes [TypeScript](http://typescriptlang.org) definitions.
 
 ## License
 
