@@ -62,9 +62,7 @@ type PositionAnalyst = {
 };
 ```
 
-# usage
-
-## path analyst usage
+# path analyst usage
 
 ```js
 import { createPathAnalyst } = from "positic";
@@ -151,7 +149,7 @@ const position = [5.77367, 45.07122, 279.608];
 const analyst = createPositionAnalyst(position);
 ```
 
-## position analyst usage
+# position analyst usage
 
 - position is in a given area
 
