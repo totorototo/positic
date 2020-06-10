@@ -119,7 +119,7 @@ const region = analyst.calculatePathBoundingBox();
 ### get positions at 10km and 20km marks
 
 ```js
-const positions = analyst.getPositionsAlongPath([10, 20]);
+const positions = analyst.getPositionsAlongPath(10, 20);
 // positions = [
 //     [5.77501, 45.07069, 281.516],
 //     [6.30259, 45.54522, 320],
