@@ -24,13 +24,13 @@ Given any valid position, return an helper object that manipulate position and c
 
 # type definitions
 
-## based type definition
+- based type
 
 ```ts
 type Position = [Longitude, Latitude, Elevation?];
 ```
 
-## path analyst type definition
+- path analyst
 
 ```ts
 type PathAnalyst = {
@@ -52,7 +52,7 @@ type PathAnalyst = {
 };
 ```
 
-## position analyst type definition
+- position analyst
 
 ```ts
 type PositionAnalyst = {
@@ -98,21 +98,21 @@ or
 const analyst = createPathAnalyst(GeoJSON.features[0].geometry.coordinates);
 ```
 
-### calculate path length
+- calculate path length
 
 ```js
 const distance = analyst.calculatePathLength();
 // distance = 144.67;
 ```
 
-### calculate path elevation
+- calculate path elevation
 
 ```js
 const elevation = analyst.calculatePathElevation();
 // elevation = {positive:1243.33, negative:1209.34}
 ```
 
-### calculate path bounding box
+- calculate path bounding box
 
 ```js
 const region = analyst.calculatePathBoundingBox();
@@ -124,7 +124,7 @@ const region = analyst.calculatePathBoundingBox();
 // }
 ```
 
-### get positions at 10km and 20km marks
+- get positions at 10km and 20km marks
 
 ```js
 const positions = analyst.getPositionsAlongPath(10, 20);
@@ -134,7 +134,7 @@ const positions = analyst.getPositionsAlongPath(10, 20);
 //]
 ```
 
-### find closest path position to given position
+- find closest path position to given position
 
 ```js
 const PARIS = [2.3488, 48.8534];
@@ -142,7 +142,7 @@ const closestPosition = analyst.findClosestPosition(PARIS);
 // closestPosition = [6.30259, 45.54522, 320]
 ```
 
-### position analyst creation
+- position analyst creation
 
 ```js
 import { createPositionAnalyst } = from "positic";
@@ -153,7 +153,7 @@ const analyst = createPositionAnalyst(position);
 
 ## position analyst usage
 
-### position is in a given area
+- position is in a given area
 
 ```js
 const area: Area = {
@@ -165,7 +165,7 @@ const area: Area = {
 const isInArea: boolean = analyst.isInArea(area);
 ```
 
-### position is in a given radius
+- position is in a given radius
 
 ```js
 const center: Position = [6.23828, 45.50127, 888.336];
@@ -173,7 +173,7 @@ const radius = 70;
 const isInRadius: boolean = analyst.isInRadius(center, radius);
 ```
 
-### calculte distance from an other position
+- calculte distance from an other position
 
 ```js
 const destination: Position = [6.23828, 45.50127, 888.336];
