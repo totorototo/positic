@@ -65,7 +65,7 @@ type PathAnalyst = {
   getPositionIndex: (position: Position) => number;
   splitPath: (start?: number, end?: number) => Path;
   calculatePathLength: () => number;
-  calculatePathElevation: (smoothingFactor?: number) => Elevation;
+  calculatePathElevation: (smoothingFactor?: number) => PathElevation;
   calculatePathBoundingBox: () => Area;
   findClosestPosition: (currentLocation: Position) => Position;
 };
