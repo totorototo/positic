@@ -36,7 +36,7 @@ type Elevation = number;
 
 ```ts
 type PathAnalyst = {
-  getPositionsAlongPath: (...distances: number[]) => Path;
+  getPositionsAlongPath: (...distances: number[]) => Position[];
   getPositionsIndicesAlongPath: (...distances: number[]) => number[];
   getPositionIndex: (position: Position) => number;
   splitPath: (start?: number, end?: number) => Path;
