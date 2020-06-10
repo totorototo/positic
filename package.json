@@ -1,16 +1,16 @@
 {
-  "name": "neptunus",
+  "name": "positic",
   "author": "toto rototo <el.totorototo@gmail.com>",
   "description": "simple geospatial analysis for browser and node",
   "version": "1.0.0",
   "license": "MIT",
-  "main": "lib/neptunus.js",
-  "unpkg": "dist/neptunus.js",
-  "module": "es/neptunus.js",
+  "main": "lib/positic.js",
+  "unpkg": "dist/positic.js",
+  "module": "es/positic.js",
   "types": "types/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/totorototo/neptunus"
+    "url": "https://github.com/totorototo/positic"
   },
   "files": [
     "dist",
@@ -78,7 +78,7 @@
     "typescript": "^3.8.3",
     "typings-tester": "^0.3.2"
   },
-  "npmName": "neptunus",
+  "npmName": "positic",
   "npmFileMap": [
     {
       "basePath": "/dist/",
