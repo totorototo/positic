@@ -24,10 +24,36 @@ Given any valid position, return an helper object that manipulate position and c
 
 # type definitions
 
-- based type
+- based types
+
+```ts
+type Longitude = number;
+type Latitude = number;
+type Elevation = number;
+```
 
 ```ts
 type Position = [Longitude, Latitude, Elevation?];
+```
+
+```ts
+type Path = Position[];
+```
+
+```ts
+type PathElevation = {
+  positive: number;
+  negative: number;
+};
+```
+
+```ts
+type Area = {
+  minLongitude: number;
+  maxLongitude: number;
+  minLatitude: number;
+  maxLatitude: number;
+};
 ```
 
 - path analyst
@@ -133,7 +159,7 @@ const closestPosition = analyst.findClosestPosition(PARIS);
 // closestPosition = [6.30259, 45.54522, 320]
 ```
 
-- position analyst creation
+# position analyst usage
 
 ```js
 import { createPositionAnalyst } = from "positic";
@@ -141,8 +167,6 @@ import { createPositionAnalyst } = from "positic";
 const position = [5.77367, 45.07122, 279.608];
 const analyst = createPositionAnalyst(position);
 ```
-
-# position analyst usage
 
 - position is in a given area
 
@@ -160,7 +184,7 @@ const isInArea = analyst.isInArea(area);
 - position is in a given radius
 
 ```js
-const center: Position = [6.23828, 45.50127, 888.336];
+const center = [6.23828, 45.50127, 888.336];
 const radius = 70;
 const isInRadius = analyst.isInRadius(center, radius);
 // isInRadius = true / false
