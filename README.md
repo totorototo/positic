@@ -2,9 +2,9 @@
 
 [![Build Status](https://travis-ci.org/totorototo/positic.svg?branch=master)](https://travis-ci.org/totorototo/positic)
 
-manipulate coordinates from [GeoJSON](http://geojson.org/).
+manipulate positions from [GeoJSON](http://geojson.org/).
 
-## install
+# install
 
     $ npm install --save positic
 
@@ -12,27 +12,25 @@ or
 
     $ yarn add positic
 
-## api
+# api
 
 ### `createPathAnalyst: (path: Path) => PathAnalyst`
 
 Given any valid position array, return an helper object that manipulate positions and calculate data.
 
-## types definitions
+### `createPositionAnalyst: (position: Position) => PositionAnalyst`
 
-```ts
-type Path = Position[];
-```
+Given any valid position, return an helper object that manipulate position and calculate data.
+
+# type definitions
+
+## based type definition
 
 ```ts
 type Position = [Longitude, Latitude, Elevation?];
 ```
 
-```ts
-type Longitude = number;
-type Latitude = number;
-type Elevation = number;
-```
+## path analyst type definition
 
 ```ts
 type PathAnalyst = {
@@ -54,12 +52,22 @@ type PathAnalyst = {
 };
 ```
 
-## example
+## position analyst type definition
 
-### create path analyst
+```ts
+type PositionAnalyst = {
+  isInArea: (area: Area) => boolean;
+  isInRadius: (center: Position, radius: number) => boolean;
+  distanceFromPosition: (destination: Position) => number;
+};
+```
+
+# usage
+
+## path analyst usage
 
 ```js
-import { createAnalyst } = from "positic";
+import { createPathAnalyst } = from "positic";
 
 const path = [
   [5.77367, 45.07122, 279.608],
@@ -132,6 +140,44 @@ const positions = analyst.getPositionsAlongPath(10, 20);
 const PARIS = [2.3488, 48.8534];
 const closestPosition = analyst.findClosestPosition(PARIS);
 // closestPosition = [6.30259, 45.54522, 320]
+```
+
+### position analyst creation
+
+```js
+import { createPositionAnalyst } = from "positic";
+
+const position = [5.77367, 45.07122, 279.608];
+const analyst = createPositionAnalyst(position);
+```
+
+## position analyst usage
+
+### position is in a given area
+
+```js
+const area: Area = {
+  maxLatitude: 49.07122,
+  minLatitude: 40.07122,
+  minLongitude: 1.77367,
+  maxLongitude: 9.77367
+};
+const isInArea: boolean = analyst.isInArea(area);
+```
+
+### position is in a given radius
+
+```js
+const center: Position = [6.23828, 45.50127, 888.336];
+const radius = 70;
+const isInRadius: boolean = analyst.isInRadius(center, radius);
+```
+
+### calculte distance from an other position
+
+```js
+const destination: Position = [6.23828, 45.50127, 888.336];
+const distance = analyst.distanceFromPosition(destination);
 ```
 
 ## TypeScript
