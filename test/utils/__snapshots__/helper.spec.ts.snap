@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`helper compute distance between Paris and Moscow 1`] = `2486.6889750256146`;

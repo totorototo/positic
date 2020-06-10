@@ -1,0 +1,12 @@
+language: node_js
+node_js: node
+cache: npm
+script:
+  - npm run prepublishOnly
+deploy:
+  provider: npm
+  email: '$NPM_EMAIL'
+  api_key: '$NPM_API_TOKEN'
+  skip_cleanup: true
+  on:
+    branch: master
