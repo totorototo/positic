@@ -24,10 +24,36 @@ Given any valid position, return an helper object that manipulate position and c
 
 # type definitions
 
-- based type
+- based types
+
+```ts
+type Longitude = number;
+type Latitude = number;
+type Elevation = number;
+```
 
 ```ts
 type Position = [Longitude, Latitude, Elevation?];
+```
+
+```ts
+type Path = Position[];
+```
+
+```ts
+type PathElevation = {
+  positive: number;
+  negative: number;
+};
+```
+
+```ts
+type Area = {
+  minLongitude: number;
+  maxLongitude: number;
+  minLatitude: number;
+  maxLatitude: number;
+};
 ```
 
 - path analyst
@@ -39,15 +65,8 @@ type PathAnalyst = {
   getPositionIndex: (position: Position) => number;
   splitPath: (start?: number, end?: number) => Path;
   calculatePathLength: () => number;
-  calculatePathElevation: (
-    smoothingFactor?: number
-  ) => { positive: number; negative: number };
-  calculatePathBoundingBox: () => {
-    minLongitude: number;
-    maxLongitude: number;
-    minLatitude: number;
-    maxLatitude: number;
-  };
+  calculatePathElevation: (smoothingFactor?: number) => Elevation;
+  calculatePathBoundingBox: () => Area;
   findClosestPosition: (currentLocation: Position) => Position;
 };
 ```
@@ -140,7 +159,7 @@ const closestPosition = analyst.findClosestPosition(PARIS);
 // closestPosition = [6.30259, 45.54522, 320]
 ```
 
-- position analyst creation
+# position analyst usage
 
 ```js
 import { createPositionAnalyst } = from "positic";
@@ -149,26 +168,26 @@ const position = [5.77367, 45.07122, 279.608];
 const analyst = createPositionAnalyst(position);
 ```
 
-# position analyst usage
-
 - position is in a given area
 
 ```js
-const area: Area = {
+const area = {
   maxLatitude: 49.07122,
   minLatitude: 40.07122,
   minLongitude: 1.77367,
   maxLongitude: 9.77367
 };
-const isInArea: boolean = analyst.isInArea(area);
+const isInArea = analyst.isInArea(area);
+// isInArea = true / false
 ```
 
 - position is in a given radius
 
 ```js
-const center: Position = [6.23828, 45.50127, 888.336];
+const center = [6.23828, 45.50127, 888.336];
 const radius = 70;
-const isInRadius: boolean = analyst.isInRadius(center, radius);
+const isInRadius = analyst.isInRadius(center, radius);
+// isInRadius = true / false
 ```
 
 - calculte distance from an other position
@@ -176,6 +195,7 @@ const isInRadius: boolean = analyst.isInRadius(center, radius);
 ```js
 const destination: Position = [6.23828, 45.50127, 888.336];
 const distance = analyst.distanceFromPosition(destination);
+// distance = 144.56
 ```
 
 ## TypeScript
