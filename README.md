@@ -6,11 +6,11 @@ manipulate coordinates from [GeoJSON](http://geojson.org/).
 
 ## install
 
-    npm install --save neptunus
+    $ npm install --save neptunus
 
 or
 
-    yarn add neptunus
+    $ yarn add neptunus
 
 ## api
 
@@ -133,3 +133,11 @@ const PARIS = [2.3488, 48.8534];
 const closestPosition = analyst.findClosestPosition(PARIS);
 // closestPosition = [6.30259, 45.54522, 320]
 ```
+
+## TypeScript
+
+neptunus includes [TypeScript](http://typescriptlang.org) definitions.
+
+## License
+
+[MIT](LICENSE)
