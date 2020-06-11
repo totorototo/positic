@@ -4,6 +4,7 @@ import { Path } from './path';
 import { PathAnalyst } from './pathAnalyst';
 import { PositionAnalyst } from './positionAnalyst';
 import { PathElevation } from './pathElevation';
+import { Statistics, Distance, Gain, Loss } from './statistics';
 
 export {
   PositionAnalyst,
@@ -14,5 +15,9 @@ export {
   Longitude,
   Latitude,
   Path,
-  PathElevation
+  PathElevation,
+  Statistics,
+  Gain,
+  Loss,
+  Distance
 };

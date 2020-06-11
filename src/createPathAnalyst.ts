@@ -1,7 +1,12 @@
-import { Position, PathAnalyst, Path, Area, PathElevation } from './types';
+import {
+  Position,
+  PathAnalyst,
+  Path,
+  Area,
+  PathElevation,
+  Statistics
+} from './types';
 import { calculateDistance } from './utils/helper';
-
-type Statistics = [number, number, number, number];
 
 type Internals = {
   distance: number;
@@ -11,7 +16,7 @@ type Internals = {
 };
 
 export const createPathAnalyst = (path: Path): PathAnalyst => {
-  const mapLocationsToProgression = (): Internals =>
+  const mapPositionsToProgression = (): Internals =>
     path.reduce(
       (
         accu: {
@@ -38,13 +43,13 @@ export const createPathAnalyst = (path: Path): PathAnalyst => {
             }
           }
 
-          accu.map.push([index, accu.distance, accu.gain, accu.loss]);
+          accu.map.push([accu.distance, accu.gain, accu.loss]);
           return accu;
         } else {
           return accu;
         }
       },
-      { distance: 0, gain: 0, loss: 0, map: [[0, 0, 0, 0]] }
+      { distance: 0, gain: 0, loss: 0, map: [[0, 0, 0]] }
     );
 
   const calculatePathLength = (): number =>
@@ -154,17 +159,21 @@ export const createPathAnalyst = (path: Path): PathAnalyst => {
     );
 
   const findClosestIndex = (map: Statistics[], distance: number): number => {
-    return map.reduce((accu, item) => {
-      if (accu === null) return item;
-      if (Math.abs(distance - item[1]) >= Math.abs(distance - accu[1])) {
-        return accu;
-      }
-      return item;
-    })[0];
+    const { index } = map.reduce(
+      (accu, item, index) => {
+        if (Math.abs(distance - item[0]) >= Math.abs(distance - accu.stat[0])) {
+          return accu;
+        }
+        return { ...accu, index: index, stat: item };
+      },
+      { index: 0, stat: [0, 0, 0] }
+    );
+
+    return index;
   };
 
   const getPositionsIndicesAlongPath = (...distances: number[]): number[] => {
-    const mapIndexProgression = mapLocationsToProgression();
+    const mapIndexProgression = mapPositionsToProgression();
     return distances.map(distance => {
       return findClosestIndex(mapIndexProgression.map, distance);
     });
@@ -176,11 +185,19 @@ export const createPathAnalyst = (path: Path): PathAnalyst => {
   const splitPath = (start = 0, end = 0): Position[] => {
     const locationsIndices = getPositionsIndicesAlongPath(start, end);
     const splitTrace = path.slice(locationsIndices[0], locationsIndices[1]);
-
     return splitTrace;
   };
 
+  const getProgressionStatistics = (currentPathIndex: number): Statistics => {
+    const mapIndexProgression = mapPositionsToProgression();
+    const result = mapIndexProgression.map.find(
+      (_, index) => index === currentPathIndex
+    );
+    return result ? result : [0, 0, 0];
+  };
+
   return {
+    getProgressionStatistics,
     getPositionsAlongPath,
     getPositionsIndicesAlongPath,
     getPositionIndex,

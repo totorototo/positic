@@ -34,17 +34,17 @@ describe('path', () => {
 
   it('get section between 10km and 40 km marks', () => {
     const section = analyst.splitPath(10, 40);
-    expect(section.length).toEqual(1086);
+    expect(section.length).toMatchSnapshot();
   });
 
   it('get position index for a given position', () => {
     const index = analyst.getPositionIndex([6.30262, 45.54413, 320]);
-    expect(index).toEqual(5546);
+    expect(index).toMatchSnapshot();
   });
 
   it('get position at 10km mark', () => {
     const location = analyst.getPositionsAlongPath(10);
-    expect(location.length).toEqual(1);
+    expect(location.length).toMatchSnapshot();
     expect(location[0]).toMatchSnapshot();
   });
 
@@ -65,5 +65,13 @@ describe('path', () => {
     const analyst = createPathAnalyst(data);
     const computedElevation = analyst.calculatePathElevation();
     expect(computedElevation).toMatchSnapshot();
+  });
+
+  it('get progression statistics', () => {
+    const index = analyst.getPositionIndex([6.30262, 45.54413, 320]);
+    expect(index).toMatchSnapshot();
+
+    const statistics = analyst.getProgressionStatistics(index);
+    expect(statistics).toMatchSnapshot();
   });
 });
