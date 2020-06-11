@@ -132,8 +132,8 @@ const elevation = analyst.calculatePathElevation();
 - calculate path bounding box
 
 ```js
-const region = analyst.calculatePathBoundingBox();
-// region = {
+const area = analyst.calculatePathBoundingBox();
+// area = {
 // "maxLatitude": 45.55014,
 // "maxLongitude": 6.30281,
 // "minLatitude": 45.06822,
@@ -144,14 +144,15 @@ const region = analyst.calculatePathBoundingBox();
 - get positions at 10km and 20km marks
 
 ```js
-const positions = analyst.getPositionsAlongPath(10, 20);
+const marks = [10, 20]
+const positions = analyst.getPositionsAlongPath(...marks);
 // positions = [
 //     [5.77501, 45.07069, 281.516],
 //     [6.30259, 45.54522, 320],
 //]
 ```
 
-- find closest path position to given position
+- find closest path position to a given position
 
 ```js
 const PARIS = [2.3488, 48.8534];

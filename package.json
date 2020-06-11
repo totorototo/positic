@@ -2,7 +2,7 @@
   "name": "positic",
   "author": "toto rototo <el.totorototo@gmail.com>",
   "description": "simple geospatial analysis for browser and node",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "license": "MIT",
   "main": "lib/positic.js",
   "unpkg": "dist/positic.js",
@@ -29,6 +29,9 @@
     "geolocation",
     "navigation"
   ],
+  "jest": {
+    "verbose":true    
+  },
   "scripts": {
     "clean": "rimraf lib dist es coverage types",
     "format": "prettier --write \"{src,test}/**/*.{js,ts}\"",
