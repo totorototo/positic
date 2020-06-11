@@ -3,7 +3,7 @@ import {
   PathAnalyst,
   Path,
   Area,
-  PathElevation,
+  Elevation,
   Statistics
 } from './types';
 import { calculateDistance } from './utils/helper';
@@ -61,7 +61,7 @@ export const createPathAnalyst = (path: Path): PathAnalyst => {
       0
     );
 
-  const calculatePathElevation = (smoothingFactor = 5): PathElevation => {
+  const calculatePathElevation = (smoothingFactor = 5): Elevation => {
     const elevations = path.map(position => position[2] || 0);
 
     // smooth array values (remove noise).

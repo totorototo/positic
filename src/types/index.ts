@@ -1,9 +1,9 @@
 import { Area } from './area';
-import { Position, Elevation, Longitude, Latitude } from './position';
+import { Position, Altitude, Longitude, Latitude } from './position';
 import { Path } from './path';
 import { PathAnalyst } from './pathAnalyst';
 import { PositionAnalyst } from './positionAnalyst';
-import { PathElevation } from './pathElevation';
+import { Elevation } from './elevation';
 import { Statistics, Distance, Gain, Loss } from './statistics';
 
 export {
@@ -11,11 +11,11 @@ export {
   PathAnalyst,
   Area,
   Position,
-  Elevation,
+  Altitude,
   Longitude,
   Latitude,
   Path,
-  PathElevation,
+  Elevation,
   Statistics,
   Gain,
   Loss,
