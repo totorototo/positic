@@ -34,6 +34,7 @@ Object {
   "getPositionIndex": [Function],
   "getPositionsAlongPath": [Function],
   "getPositionsIndicesAlongPath": [Function],
+  "getProgressionStatistics": [Function],
   "splitPath": [Function],
 }
 `;
@@ -46,10 +47,26 @@ Array [
 ]
 `;
 
-exports[`path get position at 10km mark 1`] = `
+exports[`path get position at 10km mark 1`] = `1`;
+
+exports[`path get position at 10km mark 2`] = `
 Array [
   5.82955,
   45.08631,
   1380.492,
 ]
 `;
+
+exports[`path get position index for a given position 1`] = `5546`;
+
+exports[`path get progression statistics 1`] = `5546`;
+
+exports[`path get progression statistics 2`] = `
+Array [
+  145.579639295011,
+  0,
+  0,
+]
+`;
+
+exports[`path get section between 10km and 40 km marks 1`] = `1086`;

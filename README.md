@@ -29,11 +29,14 @@ Given any valid position, return an helper object that manipulate position and c
 ```ts
 type Longitude = number;
 type Latitude = number;
-type Elevation = number;
+type Altitude = number;
+type Loss = number;
+type Gain = number;
+type Distance = number;
 ```
 
 ```ts
-type Position = [Longitude, Latitude, Elevation?];
+type Position = [Longitude, Latitude, Altitude?];
 ```
 
 ```ts
@@ -41,7 +44,7 @@ type Path = Position[];
 ```
 
 ```ts
-type PathElevation = {
+type Elevation = {
   positive: number;
   negative: number;
 };
@@ -56,6 +59,10 @@ type Area = {
 };
 ```
 
+```ts
+type Statistics = [Distance, Gain, Loss];
+```
+
 - path analyst
 
 ```ts
@@ -65,9 +72,10 @@ type PathAnalyst = {
   getPositionIndex: (position: Position) => number;
   splitPath: (start?: number, end?: number) => Path;
   calculatePathLength: () => number;
-  calculatePathElevation: (smoothingFactor?: number) => PathElevation;
+  calculatePathElevation: (smoothingFactor?: number) => Elevation;
   calculatePathBoundingBox: () => Area;
   findClosestPosition: (currentLocation: Position) => Position;
+  getProgressionStatistics: (currentPathIndex: number) => Statistics;
 };
 ```
 
@@ -144,7 +152,7 @@ const area = analyst.calculatePathBoundingBox();
 - get positions at 10km and 20km marks
 
 ```js
-const marks = [10, 20]
+const marks = [10, 20];
 const positions = analyst.getPositionsAlongPath(...marks);
 // positions = [
 //     [5.77501, 45.07069, 281.516],
@@ -158,6 +166,14 @@ const positions = analyst.getPositionsAlongPath(...marks);
 const PARIS = [2.3488, 48.8534];
 const closestPosition = analyst.findClosestPosition(PARIS);
 // closestPosition = [6.30259, 45.54522, 320]
+```
+
+- get progression statistics
+
+```js
+const currentIndex = 1200;
+const statistics = analyst.getProgressionStatistics(currentIndex);
+// statistics = [120.23, 6787.34, 5683.22]
 ```
 
 # position analyst usage
@@ -190,7 +206,6 @@ const radius = 70;
 const isInRadius = analyst.isInRadius(center, radius);
 // isInRadius = true / false
 ```
-
 
 - calculte distance from an other position
 
