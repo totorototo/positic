@@ -1,22 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`trace compute trace elevation 1`] = `
-Object {
-  "negative": 10733.783100000026,
-  "positive": 10774.175100000026,
-}
-`;
-
-exports[`trace compute trace elevation from trace without elevation data 1`] = `
-Object {
-  "negative": 0,
-  "positive": 0,
-}
-`;
-
-exports[`trace compute trace length 1`] = `145.73645926229432`;
-
-exports[`trace compute trace region 1`] = `
+exports[`path calculate path area 1`] = `
 Object {
   "maxLatitude": 45.55014,
   "maxLongitude": 6.30281,
@@ -25,7 +9,23 @@ Object {
 }
 `;
 
-exports[`trace create helper 1`] = `
+exports[`path calculate path elevation 1`] = `
+Object {
+  "negative": 10733.783100000026,
+  "positive": 10774.175100000026,
+}
+`;
+
+exports[`path calculate path length 1`] = `145.73645926229432`;
+
+exports[`path compute path elevation of path without elevation data 1`] = `
+Object {
+  "negative": 0,
+  "positive": 0,
+}
+`;
+
+exports[`path create analyst 1`] = `
 Object {
   "calculatePathBoundingBox": [Function],
   "calculatePathElevation": [Function],
@@ -38,7 +38,7 @@ Object {
 }
 `;
 
-exports[`trace find closest location of Paris 1`] = `
+exports[`path find closest path position of Paris 1`] = `
 Array [
   6.26363,
   45.53978,
@@ -46,7 +46,7 @@ Array [
 ]
 `;
 
-exports[`trace get location at 10km 1`] = `
+exports[`path get position at 10km mark 1`] = `
 Array [
   5.82955,
   45.08631,
