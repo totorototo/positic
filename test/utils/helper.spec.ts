@@ -1,4 +1,4 @@
-import { calculateDistance, Position } from '../../src/index';
+import { calculateDistance, calculateBearing, Position } from '../../src/index';
 
 describe('helper', () => {
   it('compute distance between Paris and Moscow', () => {
@@ -7,5 +7,13 @@ describe('helper', () => {
 
     const distance = calculateDistance(origin, destination);
     expect(distance).toMatchSnapshot();
+  });
+
+  it('bearing', () => {
+    const origin: Position = [-3.94915, 51.2194];
+    const destination: Position = [-3.95935, 51.2392];
+
+    const bearing = calculateBearing(origin, destination);
+    expect(bearing).toMatchSnapshot();
   });
 });

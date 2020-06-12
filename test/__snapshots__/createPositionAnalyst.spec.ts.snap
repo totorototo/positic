@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`position calculate distance between two positions 1`] = `60.06517773772652`;
+exports[`position calculate distance between two positions 1`] = `60065.177737726524`;
 
 exports[`position create analyst 1`] = `
 Object {

@@ -127,14 +127,14 @@ const analyst = createPathAnalyst(GeoJSON.features[0].geometry.coordinates);
 
 ```js
 const distance = analyst.calculatePathLength();
-// distance = 144.67;
+// distance = 144670 (in meters);
 ```
 
 - calculate path elevation
 
 ```js
 const elevation = analyst.calculatePathElevation();
-// elevation = {positive:1243.33, negative:1209.34}
+// elevation = {positive:1243.33, negative:1209.34} (in meters)
 ```
 
 - calculate path bounding box
@@ -207,12 +207,38 @@ const isInRadius = analyst.isInRadius(center, radius);
 // isInRadius = true / false
 ```
 
-- calculte distance from an other position
+- calculate distance from an other position
 
 ```js
 const destination = [6.23828, 45.50127, 888.336];
 const distance = analyst.distanceFromPosition(destination);
-// distance = 144.56
+// distance = 144560 (in meters)
+```
+
+# helper functions
+
+- calculate distance between two positions
+
+```js
+import { calculateDistance } from 'positic';
+
+const origin = [37.618423, 55.751244];
+const destination = [2.3488, 48.8534];
+
+const distance = calculateDistance(origin, destination);
+// distance = 2486688.9750256147 (in meters)
+```
+
+- calculate bearing between two positions
+
+```js
+import { calculateBearing } from 'positic';
+
+const origin: Position = [-3.94915, 51.2194];
+const destination: Position = [-3.95935, 51.2392];
+
+const bearing = calculateBearing(origin, destination);
+// bearing = 342.1247653798634 (in deg)
 ```
 
 ## TypeScript
