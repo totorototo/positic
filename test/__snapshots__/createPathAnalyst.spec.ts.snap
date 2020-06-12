@@ -47,6 +47,14 @@ Array [
 ]
 `;
 
+exports[`path get partial progression statistics 1`] = `
+Array [
+  104.64472727445164,
+  0,
+  0,
+]
+`;
+
 exports[`path get position at 10km mark 1`] = `1`;
 
 exports[`path get position at 10km mark 2`] = `
@@ -70,3 +78,15 @@ Array [
 `;
 
 exports[`path get section between 10km and 40 km marks 1`] = `1086`;
+
+exports[`path unable to get progression statistics 1`] = `
+Array [
+  0,
+  0,
+  0,
+]
+`;
+
+exports[`path unable to get section 1`] = `Array []`;
+
+exports[`path unable to get section 2 1`] = `Array []`;
