@@ -37,6 +37,16 @@ describe('path', () => {
     expect(section.length).toMatchSnapshot();
   });
 
+  it('unable to get section', () => {
+    const section = analyst.splitPath(-10, -18);
+    expect(section).toMatchSnapshot();
+  });
+
+  it('unable to get section 2', () => {
+    const section = analyst.splitPath();
+    expect(section).toMatchSnapshot();
+  });
+
   it('get position index for a given position', () => {
     const index = analyst.getPositionIndex([6.30262, 45.54413, 320]);
     expect(index).toMatchSnapshot();
@@ -71,6 +81,26 @@ describe('path', () => {
     const index = analyst.getPositionIndex([6.30262, 45.54413, 320]);
     expect(index).toMatchSnapshot();
 
+    const statistics = analyst.getProgressionStatistics(index);
+    expect(statistics).toMatchSnapshot();
+  });
+
+  it('unable to get progression statistics', () => {
+    const index = -1;
+    const statistics = analyst.getProgressionStatistics(index);
+    expect(statistics).toMatchSnapshot();
+  });
+
+  it('get partial progression statistics', () => {
+    const data: Position[] = [
+      [5.77367, 45.07122],
+      [5.77367, 45.07122],
+      [5.77407, 45.07117],
+      [5.77467, 45.07108],
+      [5.77487, 45.07091]
+    ];
+    const analyst = createPathAnalyst(data);
+    const index = 4;
     const statistics = analyst.getProgressionStatistics(index);
     expect(statistics).toMatchSnapshot();
   });
