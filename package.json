@@ -27,7 +27,11 @@
     "gpx",
     "location",
     "geolocation",
-    "navigation"
+    "navigation",
+    "longitude",
+    "latitude",
+    "elevation",
+    "altitude"
   ],
   "jest": {
     "verbose": true
