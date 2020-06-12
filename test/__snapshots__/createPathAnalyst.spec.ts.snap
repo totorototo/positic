@@ -64,8 +64,8 @@ exports[`path get progression statistics 1`] = `5546`;
 exports[`path get progression statistics 2`] = `
 Array [
   145579.63929501126,
-  0,
-  0,
+  12588.613999999976,
+  12548.222000000007,
 ]
 `;
 
