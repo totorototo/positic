@@ -33,7 +33,7 @@ describe('path', () => {
   });
 
   it('get section between 10km and 40 km marks', () => {
-    const section = analyst.splitPath(10, 40);
+    const section = analyst.splitPath(10000, 40000);
     expect(section.length).toMatchSnapshot();
   });
 
@@ -43,7 +43,7 @@ describe('path', () => {
   });
 
   it('get position at 10km mark', () => {
-    const location = analyst.getPositionsAlongPath(10);
+    const location = analyst.getPositionsAlongPath(10000);
     expect(location.length).toMatchSnapshot();
     expect(location[0]).toMatchSnapshot();
   });

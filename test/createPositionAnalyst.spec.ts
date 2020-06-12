@@ -38,14 +38,14 @@ describe('position', () => {
 
   it('position is in not radius', () => {
     const center: Position = [6.23828, 45.50127, 888.336];
-    const radius = 10;
+    const radius = 10000;
     const isInRadius: boolean = analyst.isInRadius(center, radius);
     expect(isInRadius).toBe(false);
   });
 
   it('position is in radius', () => {
     const center: Position = [6.23828, 45.50127, 888.336];
-    const radius = 70;
+    const radius = 70000;
     const isInRadius: boolean = analyst.isInRadius(center, radius);
     expect(isInRadius).toBe(true);
   });

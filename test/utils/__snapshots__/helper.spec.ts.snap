@@ -1,3 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`helper compute distance between Paris and Moscow 1`] = `2486.6889750256146`;
+exports[`helper bearing 1`] = `342.1247653798634`;
+
+exports[`helper compute distance between Paris and Moscow 1`] = `2486688.9750256147`;

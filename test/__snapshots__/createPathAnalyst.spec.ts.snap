@@ -16,7 +16,7 @@ Object {
 }
 `;
 
-exports[`path calculate path length 1`] = `145.73645926229432`;
+exports[`path calculate path length 1`] = `145736.45926229458`;
 
 exports[`path compute path elevation of path without elevation data 1`] = `
 Object {
@@ -63,7 +63,7 @@ exports[`path get progression statistics 1`] = `5546`;
 
 exports[`path get progression statistics 2`] = `
 Array [
-  145.579639295011,
+  145579.63929501126,
   0,
   0,
 ]

@@ -9,7 +9,7 @@ export {
   Area
 } from './types';
 
-export { calculateDistance } from './utils/helper';
+export { calculateDistance, calculateBearing } from './utils/helper';
 
 export { createPositionAnalyst } from './createPositionAnalyst';
 
