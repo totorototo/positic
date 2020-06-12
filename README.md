@@ -12,6 +12,35 @@ or
 
     $ yarn add positic
 
+# Usage
+
+## Javascript
+
+```js
+// CommonsJs
+const createPathAnalyst = require('positic').createPathAnalyst;
+const createPositionAnalyst = require('positic').createPositionAnalyst;
+
+// ES Modules
+import { createPathAnalyst, createPositionAnalyst } from 'positic';
+```
+
+## TypeScript
+
+```ts
+import {
+  Position,
+  Elevation,
+  Longitude,
+  Latitude,
+  PathAnalyst,
+  PositionAnalyst,
+  Path,
+  Area,
+  createPathAnalyst
+} from 'positic';
+```
+
 # api
 
 ### `createPathAnalyst: (path: Path) => PathAnalyst`
