@@ -32,10 +32,10 @@ export const createPathAnalyst = (path: Path): PathAnalyst => {
         if (index > 0) {
           const distance = calculateDistance(array[index - 1], location);
           accu.distance += distance;
-          const destinationElevation = array[index - 1][2];
-          const originElevation = location[2];
+          const destinationElevation = location[2];
+          const originElevation = array[index - 1][2];
           if (originElevation && destinationElevation) {
-            const Δφ = destinationElevation - destinationElevation;
+            const Δφ = destinationElevation - originElevation;
             if (Δφ > 0) {
               accu.gain += Δφ;
             } else {
