@@ -18,36 +18,32 @@ or
 
 ```js
 // CommonsJs
-const createPathAnalyst = require('positic').createPathAnalyst;
-const createPositionAnalyst = require('positic').createPositionAnalyst;
+const createPathHelper = require('positic').createPathHelper;
+const createPositionHelper = require('positic').createPositionHelper;
 
 // ES Modules
-import { createPathAnalyst, createPositionAnalyst } from 'positic';
+import { createPathHelper, createPositionHelper } from 'positic';
 ```
 
 ## TypeScript
 
 ```ts
-import {
-  Position,
-  Elevation,
-  Longitude,
-  Latitude,
-  PathAnalyst,
-  PositionAnalyst,
-  Path,
-  Area,
-  createPathAnalyst
-} from 'positic';
+import { PositionHelper, createPositionHelper } from 'positic';
+
+const helper: PositionHelper = createPositionHelper([
+  5.77367,
+  45.07122,
+  279.608
+]);
 ```
 
 # api
 
-### `createPathAnalyst: (path: Path) => PathAnalyst`
+### `createPathHelper: (path: Path) => PathHelper`
 
 Given any valid position array, return an helper object that manipulate positions and calculate data.
 
-### `createPositionAnalyst: (position: Position) => PositionAnalyst`
+### `createPositionHelper: (position: Position) => PositionHelper`
 
 Given any valid position, return an helper object that manipulate position and calculate data.
 
@@ -92,14 +88,14 @@ type Area = {
 type Statistics = [Distance, Gain, Loss];
 ```
 
-- path analyst
+- path helper
 
 ```ts
-type PathAnalyst = {
+type PathHelper = {
   getPositionsAlongPath: (...distances: number[]) => Position[];
   getPositionsIndicesAlongPath: (...distances: number[]) => number[];
   getPositionIndex: (position: Position) => number;
-  splitPath: (start?: number, end?: number) => Path;
+  slicePath: (start?: number, end?: number) => Path;
   calculatePathLength: () => number;
   calculatePathElevation: (smoothingFactor?: number) => Elevation;
   calculatePathBoundingBox: () => Area;
@@ -108,20 +104,20 @@ type PathAnalyst = {
 };
 ```
 
-- position analyst
+- position helper
 
 ```ts
-type PositionAnalyst = {
+type PositionHelper = {
   isInArea: (area: Area) => boolean;
   isInRadius: (center: Position, radius: number) => boolean;
   distanceFromPosition: (destination: Position) => number;
 };
 ```
 
-# path analyst usage
+# path helper usage
 
 ```js
-import { createPathAnalyst } = from "positic";
+import { createPathHelper } = from "positic";
 
 const path = [
   [5.77367, 45.07122, 279.608],
@@ -143,33 +139,33 @@ const path = [
   [6.30233, 45.54542, 320]
   ];
 
-const analyst = createPathAnalyst(path);
+const helper = createPathHelper(path);
 ```
 
 or
 
 ```js
-const analyst = createPathAnalyst(GeoJSON.features[0].geometry.coordinates);
+const helper = createPathHelper(GeoJSON.features[0].geometry.coordinates);
 ```
 
 - calculate path length
 
 ```js
-const distance = analyst.calculatePathLength();
+const distance = helper.calculatePathLength();
 // distance = 144670 (in meters);
 ```
 
 - calculate path elevation
 
 ```js
-const elevation = analyst.calculatePathElevation();
+const elevation = helper.calculatePathElevation();
 // elevation = {positive:1243.33, negative:1209.34} (in meters)
 ```
 
 - calculate path bounding box
 
 ```js
-const area = analyst.calculatePathBoundingBox();
+const area = helper.calculatePathBoundingBox();
 // area = {
 // "maxLatitude": 45.55014,
 // "maxLongitude": 6.30281,
@@ -182,7 +178,7 @@ const area = analyst.calculatePathBoundingBox();
 
 ```js
 const marks = [10, 20];
-const positions = analyst.getPositionsAlongPath(...marks);
+const positions = helper.getPositionsAlongPath(...marks);
 // positions = [
 //     [5.77501, 45.07069, 281.516],
 //     [6.30259, 45.54522, 320],
@@ -193,7 +189,7 @@ const positions = analyst.getPositionsAlongPath(...marks);
 
 ```js
 const PARIS = [2.3488, 48.8534];
-const closestPosition = analyst.findClosestPosition(PARIS);
+const closestPosition = helper.findClosestPosition(PARIS);
 // closestPosition = [6.30259, 45.54522, 320]
 ```
 
@@ -201,17 +197,17 @@ const closestPosition = analyst.findClosestPosition(PARIS);
 
 ```js
 const currentIndex = 1200;
-const statistics = analyst.getProgressionStatistics(currentIndex);
-// statistics = [120.23, 6787.34, 5683.22]
+const statistics = helper.getProgressionStatistics(currentIndex);
+// statistics = [120.23, 6787.34, 5683.22] (distance in meters, positive elevation in meters, negative elevation in meters)
 ```
 
-# position analyst usage
+# position helper usage
 
 ```js
-import { createPositionAnalyst } = from "positic";
+import { createPositionHelper } = from "positic";
 
 const position = [5.77367, 45.07122, 279.608];
-const analyst = createPositionAnalyst(position);
+const helper = createPositionHelper(position);
 ```
 
 - position is in a given area
@@ -223,7 +219,7 @@ const area = {
   minLongitude: 1.77367,
   maxLongitude: 9.77367
 };
-const isInArea = analyst.isInArea(area);
+const isInArea = helper.isInArea(area);
 // isInArea = true / false
 ```
 
@@ -232,7 +228,7 @@ const isInArea = analyst.isInArea(area);
 ```js
 const center = [6.23828, 45.50127, 888.336];
 const radius = 70;
-const isInRadius = analyst.isInRadius(center, radius);
+const isInRadius = helper.isInRadius(center, radius);
 // isInRadius = true / false
 ```
 
@@ -240,11 +236,11 @@ const isInRadius = analyst.isInRadius(center, radius);
 
 ```js
 const destination = [6.23828, 45.50127, 888.336];
-const distance = analyst.distanceFromPosition(destination);
+const distance = helper.distanceFromPosition(destination);
 // distance = 144560 (in meters)
 ```
 
-# helper functions
+# generic helper functions
 
 - calculate distance between two positions
 

@@ -3,14 +3,14 @@ export {
   Elevation,
   Longitude,
   Latitude,
-  PathAnalyst,
-  PositionAnalyst,
+  PathHelper,
+  PositionHelper,
   Path,
   Area
 } from './types';
 
 export { calculateDistance, calculateBearing } from './utils/helper';
 
-export { createPositionAnalyst } from './createPositionAnalyst';
+export { createPositionHelper } from './createPositionHelper';
 
-export { createPathAnalyst } from './createPathAnalyst';
+export { createPathHelper } from './createPathHelper';

@@ -1,6 +1,6 @@
 import {
   Position,
-  PathAnalyst,
+  PathHelper,
   Path,
   Area,
   Elevation,
@@ -15,7 +15,7 @@ type Internals = {
   map: Statistics[];
 };
 
-export const createPathAnalyst = (path: Path): PathAnalyst => {
+export const createPathHelper = (path: Path): PathHelper => {
   const mapPositionsToProgression = (): Internals =>
     path.reduce(
       (
@@ -182,7 +182,7 @@ export const createPathAnalyst = (path: Path): PathAnalyst => {
   const getPositionsAlongPath = (...distances: number[]): Position[] =>
     getPositionsIndicesAlongPath(...distances).map(index => path[index]);
 
-  const splitPath = (start = 0, end = 0): Position[] => {
+  const slicePath = (start = 0, end = 0): Position[] => {
     const locationsIndices = getPositionsIndicesAlongPath(start, end);
     const splitTrace = path.slice(locationsIndices[0], locationsIndices[1]);
     return splitTrace;
@@ -201,7 +201,7 @@ export const createPathAnalyst = (path: Path): PathAnalyst => {
     getPositionsAlongPath,
     getPositionsIndicesAlongPath,
     getPositionIndex,
-    splitPath,
+    slicePath,
     calculatePathLength,
     calculatePathElevation,
     calculatePathBoundingBox,

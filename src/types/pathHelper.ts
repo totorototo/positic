@@ -4,12 +4,12 @@ import { Area } from './area';
 import { Elevation } from './elevation';
 import { Statistics } from './statistics';
 
-export type PathAnalyst = {
+export type PathHelper = {
   getProgressionStatistics: (currentPathIndex: number) => Statistics;
   getPositionsAlongPath: (...distances: number[]) => Path;
   getPositionsIndicesAlongPath: (...distances: number[]) => number[];
   getPositionIndex: (position: Position) => number;
-  splitPath: (start?: number, end?: number) => Path;
+  slicePath: (start?: number, end?: number) => Path;
   calculatePathLength: () => number;
   calculatePathElevation: (smoothingFactor?: number) => Elevation;
   calculatePathBoundingBox: () => Area;

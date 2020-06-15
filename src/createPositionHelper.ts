@@ -1,7 +1,7 @@
-import { PositionAnalyst, Position, Area } from './types';
+import { PositionHelper, Position, Area } from './types';
 import { calculateDistance } from './utils/helper';
 
-export const createPositionAnalyst = (position: Position): PositionAnalyst => {
+export const createPositionHelper = (position: Position): PositionHelper => {
   const isInArea = (area: Area): boolean => {
     return (
       position[0] > area.minLongitude &&
