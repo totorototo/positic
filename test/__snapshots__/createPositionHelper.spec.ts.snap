@@ -2,7 +2,7 @@
 
 exports[`position calculate distance between two positions 1`] = `60065.177737726524`;
 
-exports[`position create analyst 1`] = `
+exports[`position create helper 1`] = `
 Object {
   "distanceFromPosition": [Function],
   "isInArea": [Function],

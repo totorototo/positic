@@ -1,6 +1,6 @@
-import { Coordinates } from '../src/index';
+import { Position } from '../src/index';
 
-const locations: Array<Coordinates> = [
+const locations: Array<Position> = [
   [5.77367, 45.07122, 279.608],
   [5.77367, 45.07122, 279.608],
   [5.77407, 45.07117, 279.926],

@@ -25,7 +25,7 @@ Object {
 }
 `;
 
-exports[`path create analyst 1`] = `
+exports[`path create helper 1`] = `
 Object {
   "calculatePathBoundingBox": [Function],
   "calculatePathElevation": [Function],
@@ -35,7 +35,7 @@ Object {
   "getPositionsAlongPath": [Function],
   "getPositionsIndicesAlongPath": [Function],
   "getProgressionStatistics": [Function],
-  "splitPath": [Function],
+  "slicePath": [Function],
 }
 `;
 
