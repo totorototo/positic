@@ -2,7 +2,7 @@
   "name": "positic",
   "author": "toto rototo <el.totorototo@gmail.com>",
   "description": "simple geospatial analysis for browser and node",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "license": "MIT",
   "main": "lib/positic.js",
   "unpkg": "dist/positic.js",
