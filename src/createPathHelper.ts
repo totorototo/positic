@@ -1,9 +1,9 @@
 import {
-  Position,
-  PathHelper,
-  Path,
   Area,
   Elevation,
+  Path,
+  PathHelper,
+  Position,
   Statistics
 } from './types';
 import { calculateDistance } from './utils/helper';
@@ -19,7 +19,7 @@ export const createPathHelper = (path: Path): PathHelper => {
   const mapPositionsToProgression = (): Internals =>
     path.reduce(
       (
-        accu: {
+        accum: {
           distance: number;
           gain: number;
           loss: number;
@@ -31,22 +31,22 @@ export const createPathHelper = (path: Path): PathHelper => {
       ) => {
         if (index > 0) {
           const distance = calculateDistance(array[index - 1], location);
-          accu.distance += distance;
+          accum.distance += distance;
           const destinationElevation = location[2];
           const originElevation = array[index - 1][2];
           if (originElevation && destinationElevation) {
             const Δφ = destinationElevation - originElevation;
             if (Δφ > 0) {
-              accu.gain += Δφ;
+              accum.gain += Δφ;
             } else {
-              accu.loss += Math.abs(Δφ);
+              accum.loss += Math.abs(Δφ);
             }
           }
 
-          accu.map.push([accu.distance, accu.gain, accu.loss]);
-          return accu;
+          accum.map.push([accum.distance, accum.gain, accum.loss]);
+          return accum;
         } else {
-          return accu;
+          return accum;
         }
       },
       { distance: 0, gain: 0, loss: 0, map: [[0, 0, 0]] }
@@ -133,14 +133,14 @@ export const createPathHelper = (path: Path): PathHelper => {
 
   const findClosestPosition = (currentPosition: Position): Position => {
     const closestLocation = path.reduce(
-      (accu, position) => {
+      (accum, position) => {
         const distance = calculateDistance(position, currentPosition);
 
-        if (distance < accu.distance) {
-          accu.distance = distance;
-          accu.position = position;
+        if (distance < accum.distance) {
+          accum.distance = distance;
+          accum.position = position;
         }
-        return accu;
+        return accum;
       },
       {
         position: path[0],
@@ -160,11 +160,13 @@ export const createPathHelper = (path: Path): PathHelper => {
 
   const findClosestIndex = (map: Statistics[], distance: number): number => {
     const { index } = map.reduce(
-      (accu, item, index) => {
-        if (Math.abs(distance - item[0]) >= Math.abs(distance - accu.stat[0])) {
-          return accu;
+      (accum, item, index) => {
+        if (
+          Math.abs(distance - item[0]) >= Math.abs(distance - accum.stat[0])
+        ) {
+          return accum;
         }
-        return { ...accu, index: index, stat: item };
+        return { ...accum, index: index, stat: item };
       },
       { index: 0, stat: [0, 0, 0] }
     );
@@ -184,8 +186,7 @@ export const createPathHelper = (path: Path): PathHelper => {
 
   const slicePath = (start = 0, end = 0): Position[] => {
     const locationsIndices = getPositionsIndicesAlongPath(start, end);
-    const splitTrace = path.slice(locationsIndices[0], locationsIndices[1]);
-    return splitTrace;
+    return path.slice(locationsIndices[0], locationsIndices[1]);
   };
 
   const getProgressionStatistics = (currentPathIndex: number): Statistics => {

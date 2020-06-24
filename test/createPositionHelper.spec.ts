@@ -1,9 +1,4 @@
-import {
-  createPositionHelper,
-  PositionHelper,
-  Position,
-  Area
-} from '../src/index';
+import { createPositionHelper, PositionHelper, Position, Area } from '../src';
 
 let helper: PositionHelper;
 const position: Position = [5.77367, 45.07122];
