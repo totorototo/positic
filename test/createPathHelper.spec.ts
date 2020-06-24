@@ -1,4 +1,4 @@
-import { createPathHelper, PathHelper, Position } from '../src/index';
+import { createPathHelper, PathHelper, Position } from '../src';
 import data from './data';
 
 let helper: PathHelper;

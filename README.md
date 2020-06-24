@@ -259,8 +259,8 @@ const distance = calculateDistance(origin, destination);
 ```js
 import { calculateBearing } from 'positic';
 
-const origin: Position = [-3.94915, 51.2194];
-const destination: Position = [-3.95935, 51.2392];
+const origin = [-3.94915, 51.2194];
+const destination = [-3.95935, 51.2392];
 
 const bearing = calculateBearing(origin, destination);
 // bearing = 342.1247653798634 (in deg)
