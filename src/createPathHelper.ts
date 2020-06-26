@@ -35,14 +35,13 @@ export const createPathHelper = (path: Path): PathHelper => {
           const destinationElevation = location[2];
           const originElevation = array[index - 1][2];
           if (originElevation && destinationElevation) {
-            const Δφ = destinationElevation - originElevation;
-            if (Δφ > 0) {
-              accum.gain += Δφ;
+            const delta = destinationElevation - originElevation;
+            if (delta > 0) {
+              accum.gain += delta;
             } else {
-              accum.loss += Math.abs(Δφ);
+              accum.loss += Math.abs(delta);
             }
           }
-
           accum.map.push([accum.distance, accum.gain, accum.loss]);
           return accum;
         } else {
@@ -97,11 +96,11 @@ export const createPathHelper = (path: Path): PathHelper => {
     return smoothedElevations.reduce(
       (elevationGain, elevation, index, values) => {
         if (values[index + 1]) {
-          const Δφ = values[index + 1] - elevation;
-          if (Δφ > 0) {
-            elevationGain.positive = elevationGain.positive + Δφ;
+          const delta = values[index + 1] - elevation;
+          if (delta > 0) {
+            elevationGain.positive = elevationGain.positive + delta;
           } else {
-            elevationGain.negative = elevationGain.negative + Math.abs(Δφ);
+            elevationGain.negative = elevationGain.negative + Math.abs(delta);
           }
           return elevationGain;
         }
