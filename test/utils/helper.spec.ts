@@ -1,7 +1,7 @@
-import { calculateDistance, calculateBearing, Position } from '../../src/index';
+import { calculateDistance, calculateBearing, Position } from '../../src';
 
 describe('helper', () => {
-  it('calcute distance between Paris and Moscow', () => {
+  it('calculate distance between Paris and Moscow', () => {
     const origin: Position = [37.618423, 55.751244];
     const destination: Position = [2.3488, 48.8534];
 

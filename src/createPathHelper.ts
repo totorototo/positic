@@ -1,9 +1,9 @@
 import {
-  Position,
-  PathHelper,
-  Path,
   Area,
   Elevation,
+  Path,
+  PathHelper,
+  Position,
   Statistics
 } from './types';
 import { calculateDistance } from './utils/helper';
@@ -19,7 +19,7 @@ export const createPathHelper = (path: Path): PathHelper => {
   const mapPositionsToProgression = (): Internals =>
     path.reduce(
       (
-        accu: {
+        accum: {
           distance: number;
           gain: number;
           loss: number;
@@ -31,22 +31,22 @@ export const createPathHelper = (path: Path): PathHelper => {
       ) => {
         if (index > 0) {
           const distance = calculateDistance(array[index - 1], location);
-          accu.distance += distance;
+          accum.distance += distance;
           const destinationElevation = location[2];
           const originElevation = array[index - 1][2];
           if (originElevation && destinationElevation) {
-            const Δφ = destinationElevation - originElevation;
-            if (Δφ > 0) {
-              accu.gain += Δφ;
+            const delta = destinationElevation - originElevation;
+            if (delta > 0) {
+              accum.gain += delta;
             } else {
-              accu.loss += Math.abs(Δφ);
+              accum.loss += Math.abs(delta);
             }
           }
 
-          accu.map.push([accu.distance, accu.gain, accu.loss]);
-          return accu;
+          accum.map.push([accum.distance, accum.gain, accum.loss]);
+          return accum;
         } else {
-          return accu;
+          return accum;
         }
       },
       { distance: 0, gain: 0, loss: 0, map: [[0, 0, 0]] }
@@ -97,11 +97,11 @@ export const createPathHelper = (path: Path): PathHelper => {
     return smoothedElevations.reduce(
       (elevationGain, elevation, index, values) => {
         if (values[index + 1]) {
-          const Δφ = values[index + 1] - elevation;
-          if (Δφ > 0) {
-            elevationGain.positive = elevationGain.positive + Δφ;
+          const delta = values[index + 1] - elevation;
+          if (delta > 0) {
+            elevationGain.positive = elevationGain.positive + delta;
           } else {
-            elevationGain.negative = elevationGain.negative + Math.abs(Δφ);
+            elevationGain.negative = elevationGain.negative + Math.abs(delta);
           }
           return elevationGain;
         }
@@ -184,8 +184,7 @@ export const createPathHelper = (path: Path): PathHelper => {
 
   const slicePath = (start = 0, end = 0): Position[] => {
     const locationsIndices = getPositionsIndicesAlongPath(start, end);
-    const splitTrace = path.slice(locationsIndices[0], locationsIndices[1]);
-    return splitTrace;
+    return path.slice(locationsIndices[0], locationsIndices[1]);
   };
 
   const getProgressionStatistics = (currentPathIndex: number): Statistics => {

@@ -1,4 +1,4 @@
-import { createPathHelper, PathHelper, Position } from '../src/index';
+import { createPathHelper, PathHelper, Position } from '../src';
 import data from './data';
 
 let helper: PathHelper;
@@ -28,8 +28,8 @@ describe('path', () => {
   });
 
   it('calculate path area', () => {
-    const boundindBox = helper.calculatePathBoundingBox();
-    expect(boundindBox).toMatchSnapshot();
+    const boundingBox = helper.calculatePathBoundingBox();
+    expect(boundingBox).toMatchSnapshot();
   });
 
   it('get section between 10km and 40 km marks', () => {
