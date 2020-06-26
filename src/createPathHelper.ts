@@ -42,7 +42,6 @@ export const createPathHelper = (path: Path): PathHelper => {
               accum.loss += Math.abs(delta);
             }
           }
-
           accum.map.push([accum.distance, accum.gain, accum.loss]);
           return accum;
         } else {
@@ -133,14 +132,14 @@ export const createPathHelper = (path: Path): PathHelper => {
 
   const findClosestPosition = (currentPosition: Position): Position => {
     const closestLocation = path.reduce(
-      (accu, position) => {
+      (accum, position) => {
         const distance = calculateDistance(position, currentPosition);
 
-        if (distance < accu.distance) {
-          accu.distance = distance;
-          accu.position = position;
+        if (distance < accum.distance) {
+          accum.distance = distance;
+          accum.position = position;
         }
-        return accu;
+        return accum;
       },
       {
         position: path[0],
@@ -160,11 +159,13 @@ export const createPathHelper = (path: Path): PathHelper => {
 
   const findClosestIndex = (map: Statistics[], distance: number): number => {
     const { index } = map.reduce(
-      (accu, item, index) => {
-        if (Math.abs(distance - item[0]) >= Math.abs(distance - accu.stat[0])) {
-          return accu;
+      (accum, item, index) => {
+        if (
+          Math.abs(distance - item[0]) >= Math.abs(distance - accum.stat[0])
+        ) {
+          return accum;
         }
-        return { ...accu, index: index, stat: item };
+        return { ...accum, index: index, stat: item };
       },
       { index: 0, stat: [0, 0, 0] }
     );
