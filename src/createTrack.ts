@@ -1,11 +1,4 @@
-import {
-  Area,
-  Elevation,
-  Path,
-  PathHelper,
-  Position,
-  Statistics
-} from './types';
+import { Area, Elevation, Track, Position, Statistics } from './types';
 import { calculateDistance } from './utils/helper';
 
 type Internals = {
@@ -15,9 +8,9 @@ type Internals = {
   map: Statistics[];
 };
 
-export const createPathHelper = (path: Path): PathHelper => {
+export const createTrack = (positions: Position[]): Track => {
   const mapPositionsToProgression = (): Internals =>
-    path.reduce(
+    positions.reduce(
       (
         accum: {
           distance: number;
@@ -51,8 +44,8 @@ export const createPathHelper = (path: Path): PathHelper => {
       { distance: 0, gain: 0, loss: 0, map: [[0, 0, 0]] }
     );
 
-  const calculatePathLength = (): number =>
-    path.reduce(
+  const getLength = (): number =>
+    positions.reduce(
       (distance, position, index, array) =>
         index < array.length - 1
           ? distance + calculateDistance(position, array[index + 1])
@@ -60,8 +53,8 @@ export const createPathHelper = (path: Path): PathHelper => {
       0
     );
 
-  const calculatePathElevation = (smoothingFactor = 5): Elevation => {
-    const elevations = path.map(position => position[2] || 0);
+  const getElevation = (smoothingFactor = 5): Elevation => {
+    const elevations = positions.map(position => position[2] || 0);
 
     // smooth array values (remove noise).
     const smoothedElevations = elevations.reduce(
@@ -110,28 +103,24 @@ export const createPathHelper = (path: Path): PathHelper => {
     );
   };
 
-  const calculatePathBoundingBox = (): Area =>
-    path.reduce(
+  const getBoundingBox = (): Area =>
+    positions.reduce(
       (region, position) => ({
-        minLongitude:
-          position[0] < region.minLongitude ? position[0] : region.minLongitude,
-        maxLongitude:
-          position[0] > region.maxLongitude ? position[0] : region.maxLongitude,
-        minLatitude:
-          position[1] < region.minLatitude ? position[1] : region.minLatitude,
-        maxLatitude:
-          position[1] > region.maxLatitude ? position[1] : region.maxLatitude
+        minLongitude: Math.min(position[0], region.minLongitude),
+        maxLongitude: Math.max(position[0], region.maxLongitude),
+        minLatitude: Math.min(position[1], region.minLatitude),
+        maxLatitude: Math.max(position[1], region.maxLatitude)
       }),
       {
-        minLongitude: path[0][0],
-        maxLongitude: path[0][0],
-        minLatitude: path[0][1],
-        maxLatitude: path[0][1]
+        minLongitude: positions[0][0],
+        maxLongitude: positions[0][0],
+        minLatitude: positions[0][1],
+        maxLatitude: positions[0][1]
       }
     );
 
   const findClosestPosition = (currentPosition: Position): Position => {
-    const closestLocation = path.reduce(
+    const closestLocation = positions.reduce(
       (accum, position) => {
         const distance = calculateDistance(position, currentPosition);
 
@@ -142,15 +131,15 @@ export const createPathHelper = (path: Path): PathHelper => {
         return accum;
       },
       {
-        position: path[0],
-        distance: calculateDistance(currentPosition, path[0])
+        position: positions[0],
+        distance: calculateDistance(currentPosition, positions[0])
       }
     );
     return closestLocation.position;
   };
 
   const getPositionIndex = (position: Position): number =>
-    path.findIndex(
+    positions.findIndex(
       currentPosition =>
         currentPosition[0] === position[0] &&
         currentPosition[1] === position[1] &&
@@ -173,19 +162,19 @@ export const createPathHelper = (path: Path): PathHelper => {
     return index;
   };
 
-  const getPositionsIndicesAlongPath = (...distances: number[]): number[] => {
+  const getPositionsIndicesAt = (...distances: number[]): number[] => {
     const mapIndexProgression = mapPositionsToProgression();
     return distances.map(distance => {
       return findClosestIndex(mapIndexProgression.map, distance);
     });
   };
 
-  const getPositionsAlongPath = (...distances: number[]): Position[] =>
-    getPositionsIndicesAlongPath(...distances).map(index => path[index]);
+  const getPositionsAt = (...distances: number[]): Position[] =>
+    getPositionsIndicesAt(...distances).map(index => positions[index]);
 
-  const slicePath = (start = 0, end = 0): Position[] => {
-    const locationsIndices = getPositionsIndicesAlongPath(start, end);
-    return path.slice(locationsIndices[0], locationsIndices[1]);
+  const slice = (start = 0, end = 0): Position[] => {
+    const locationsIndices = getPositionsIndicesAt(start, end);
+    return positions.slice(locationsIndices[0], locationsIndices[1]);
   };
 
   const getProgressionStatistics = (currentPathIndex: number): Statistics => {
@@ -198,13 +187,13 @@ export const createPathHelper = (path: Path): PathHelper => {
 
   return {
     getProgressionStatistics,
-    getPositionsAlongPath,
-    getPositionsIndicesAlongPath,
+    getPositionsAt,
+    getPositionsIndicesAt,
     getPositionIndex,
-    slicePath,
-    calculatePathLength,
-    calculatePathElevation,
-    calculatePathBoundingBox,
+    slice,
+    getLength,
+    getElevation,
+    getBoundingBox,
     findClosestPosition
   };
 };
