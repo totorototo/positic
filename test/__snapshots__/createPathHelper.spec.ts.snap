@@ -25,17 +25,17 @@ Object {
 }
 `;
 
-exports[`path create helper 1`] = `
+exports[`path create track 1`] = `
 Object {
-  "calculatePathBoundingBox": [Function],
-  "calculatePathElevation": [Function],
-  "calculatePathLength": [Function],
   "findClosestPosition": [Function],
+  "getBoundingBox": [Function],
+  "getElevation": [Function],
+  "getLength": [Function],
   "getPositionIndex": [Function],
-  "getPositionsAlongPath": [Function],
-  "getPositionsIndicesAlongPath": [Function],
+  "getPositionsAt": [Function],
+  "getPositionsIndicesAt": [Function],
   "getProgressionStatistics": [Function],
-  "slicePath": [Function],
+  "slice": [Function],
 }
 `;
 

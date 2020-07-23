@@ -1,4 +1,4 @@
-import { Position } from '../types';
+import { Area, Position } from '../types';
 
 export const calculateDistance = (
   origin: Position,
@@ -39,4 +39,22 @@ export const calculateBearing = (
   const teta = Math.atan2(y, x);
 
   return ((teta * 180) / Math.PI + 360) % 360; // in degrees
+};
+
+export const isInArea = (current: Position, area: Area): boolean => {
+  return (
+    current[0] > area.minLongitude &&
+    current[0] < area.maxLongitude &&
+    current[1] > area.minLatitude &&
+    current[1] < area.maxLatitude
+  );
+};
+
+export const isInRadius = (
+  current: Position,
+  center: Position,
+  radius: number
+): boolean => {
+  const distance = calculateDistance(center, current);
+  return distance - radius < 0;
 };
