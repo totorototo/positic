@@ -1,16 +1,10 @@
+export { Position, Elevation, Longitude, Latitude, Track, Area } from './types';
+
 export {
-  Position,
-  Elevation,
-  Longitude,
-  Latitude,
-  PathHelper,
-  PositionHelper,
-  Path,
-  Area
-} from './types';
+  calculateDistance,
+  calculateBearing,
+  isInArea,
+  isInRadius
+} from './utils/helper';
 
-export { calculateDistance, calculateBearing } from './utils/helper';
-
-export { createPositionHelper } from './createPositionHelper';
-
-export { createPathHelper } from './createPathHelper';
+export { createTrack } from './createTrack';

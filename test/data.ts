@@ -1,6 +1,6 @@
 import { Position } from '../src/index';
 
-const locations: Array<Position> = [
+const positions: Position[] = [
   [5.77367, 45.07122, 279.608],
   [5.77367, 45.07122, 279.608],
   [5.77407, 45.07117, 279.926],
@@ -5558,4 +5558,4 @@ const locations: Array<Position> = [
   [6.30233, 45.54542, 320]
 ];
 
-export default locations;
+export default positions;

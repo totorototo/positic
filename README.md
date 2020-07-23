@@ -18,34 +18,25 @@ or
 
 ```js
 // CommonsJs
-const createPathHelper = require('positic').createPathHelper;
-const createPositionHelper = require('positic').createPositionHelper;
+const createTrack = require('positic').createTrack;
 
 // ES Modules
-import { createPathHelper, createPositionHelper } from 'positic';
+import { createTrack } from 'positic';
 ```
 
 ## TypeScript
 
 ```ts
-import { PositionHelper, createPositionHelper } from 'positic';
+import { Track, createTrack } from 'positic';
 
-const helper: PositionHelper = createPositionHelper([
-  5.77367,
-  45.07122,
-  279.608
-]);
+const track: Track = createTrack([5.77367, 45.07122, 279.608]);
 ```
 
 # api
 
-### `createPathHelper: (path: Path) => PathHelper`
+### `createTrack: (positions: Positions[]) => Track`
 
-Given any valid position array, return an helper object that manipulate positions and calculate data.
-
-### `createPositionHelper: (position: Position) => PositionHelper`
-
-Given any valid position, return an helper object that manipulate position and calculate data.
+Given any valid position array, return an object that manipulate positions and calculate data.
 
 # type definitions
 
@@ -62,10 +53,6 @@ type Distance = number;
 
 ```ts
 type Position = [Longitude, Latitude, Altitude?];
-```
-
-```ts
-type Path = Position[];
 ```
 
 ```ts
@@ -88,38 +75,28 @@ type Area = {
 type Statistics = [Distance, Gain, Loss];
 ```
 
-- path helper
+- Track
 
 ```ts
-type PathHelper = {
-  getPositionsAlongPath: (...distances: number[]) => Position[];
-  getPositionsIndicesAlongPath: (...distances: number[]) => number[];
+type Track = {
+  getPositionsAt: (...distances: number[]) => Position[];
+  getPositionsIndicesAt: (...distances: number[]) => number[];
   getPositionIndex: (position: Position) => number;
-  slicePath: (start?: number, end?: number) => Path;
-  calculatePathLength: () => number;
-  calculatePathElevation: (smoothingFactor?: number) => Elevation;
-  calculatePathBoundingBox: () => Area;
+  slice: (start?: number, end?: number) => Path;
+  getLength: () => number;
+  getElevation: (smoothingFactor?: number) => Elevation;
+  getBoundingBox: () => Area;
   findClosestPosition: (currentLocation: Position) => Position;
   getProgressionStatistics: (currentPathIndex: number) => Statistics;
 };
 ```
 
-- position helper
-
-```ts
-type PositionHelper = {
-  isInArea: (area: Area) => boolean;
-  isInRadius: (center: Position, radius: number) => boolean;
-  distanceFromPosition: (destination: Position) => number;
-};
-```
-
-# path helper usage
+# Track usage
 
 ```js
-import { createPathHelper } = from "positic";
+import { createTrack } = from "positic";
 
-const path = [
+const positions = [
   [5.77367, 45.07122, 279.608],
   [5.77367, 45.07122, 279.608],
   [5.77407, 45.07117, 279.926],
@@ -139,33 +116,33 @@ const path = [
   [6.30233, 45.54542, 320]
   ];
 
-const helper = createPathHelper(path);
+const track = createTrack(positions);
 ```
 
 or
 
 ```js
-const helper = createPathHelper(GeoJSON.features[0].geometry.coordinates);
+const track = createTrack(GeoJSON.features[0].geometry.coordinates);
 ```
 
-- calculate path length
+- calculate track length
 
 ```js
-const distance = helper.calculatePathLength();
+const distance = track.getLength();
 // distance = 144670 (in meters);
 ```
 
-- calculate path elevation
+- calculate track elevation
 
 ```js
-const elevation = helper.calculatePathElevation();
+const elevation = track.getElevation();
 // elevation = {positive:1243.33, negative:1209.34} (in meters)
 ```
 
-- calculate path bounding box
+- calculate track bounding box
 
 ```js
-const area = helper.calculatePathBoundingBox();
+const area = track.getBoundingBox();
 // area = {
 // "maxLatitude": 45.55014,
 // "maxLongitude": 6.30281,
@@ -177,19 +154,19 @@ const area = helper.calculatePathBoundingBox();
 - get positions at 10km and 20km marks
 
 ```js
-const marks = [10, 20];
-const positions = helper.getPositionsAlongPath(...marks);
+const marks = [10000, 20000];
+const positions = get.getPositionsAt(...marks);
 // positions = [
 //     [5.77501, 45.07069, 281.516],
 //     [6.30259, 45.54522, 320],
 //]
 ```
 
-- find closest path position to a given position
+- find the closest track position to a given position
 
 ```js
 const PARIS = [2.3488, 48.8534];
-const closestPosition = helper.findClosestPosition(PARIS);
+const closestPosition = track.findClosestPosition(PARIS);
 // closestPosition = [6.30259, 45.54522, 320]
 ```
 
@@ -197,47 +174,8 @@ const closestPosition = helper.findClosestPosition(PARIS);
 
 ```js
 const currentIndex = 1200;
-const statistics = helper.getProgressionStatistics(currentIndex);
+const statistics = track.getProgressionStatistics(currentIndex);
 // statistics = [120.23, 6787.34, 5683.22] (distance in meters, positive elevation in meters, negative elevation in meters)
-```
-
-# position helper usage
-
-```js
-import { createPositionHelper } = from "positic";
-
-const position = [5.77367, 45.07122, 279.608];
-const helper = createPositionHelper(position);
-```
-
-- position is in a given area
-
-```js
-const area = {
-  maxLatitude: 49.07122,
-  minLatitude: 40.07122,
-  minLongitude: 1.77367,
-  maxLongitude: 9.77367
-};
-const isInArea = helper.isInArea(area);
-// isInArea = true / false
-```
-
-- position is in a given radius
-
-```js
-const center = [6.23828, 45.50127, 888.336];
-const radius = 70;
-const isInRadius = helper.isInRadius(center, radius);
-// isInRadius = true / false
-```
-
-- calculate distance from an other position
-
-```js
-const destination = [6.23828, 45.50127, 888.336];
-const distance = helper.distanceFromPosition(destination);
-// distance = 144560 (in meters)
 ```
 
 # generic helper functions
@@ -264,6 +202,36 @@ const destination = [-3.95935, 51.2392];
 
 const bearing = calculateBearing(origin, destination);
 // bearing = 342.1247653798634 (in deg)
+```
+
+- check if position is in a given area
+
+```js
+import { isInArea } from 'positic';
+
+const current = [-3.94915, 51.2194];
+
+const area = {
+  maxLatitude: 49.07122,
+  minLatitude: 40.07122,
+  minLongitude: 1.77367,
+  maxLongitude: 9.77367
+};
+const isIn = isInArea(current, area);
+// isIn = true / false
+```
+
+- check if position is in a given radius
+
+```js
+import { isRadius } from 'positic';
+
+const current = [-3.94915, 51.2194];
+const center = [6.23828, 45.50127, 888.336];
+const radius = 70;
+
+const isIn = location.isInRadius(current, center, radius);
+// isIn = true / false
 ```
 
 ## TypeScript
