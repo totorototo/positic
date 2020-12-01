@@ -1,5 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`helper calculate bearing between two positions 1`] = `342.1247653798634`;
+exports[`helper calculate bearing between two positions 1`] = `58.65519236183434`;
 
 exports[`helper calculate distance between Paris and Moscow 1`] = `2486688.9750256147`;

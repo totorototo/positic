@@ -17,8 +17,8 @@ describe('helper', () => {
   });
 
   it('calculate bearing between two positions', () => {
-    const origin: Position = [-3.94915, 51.2194];
-    const destination: Position = [-3.95935, 51.2392];
+    const origin: Position = [2.350987, 48.856667];
+    const destination: Position = [37.617634, 55.755787];
 
     const bearing = calculateBearing(origin, destination);
     expect(bearing).toMatchSnapshot();

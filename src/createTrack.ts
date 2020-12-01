@@ -112,10 +112,10 @@ export const createTrack = (positions: Position[]): Track => {
         maxLatitude: Math.max(position[1], region.maxLatitude)
       }),
       {
-        minLongitude: positions[0][0],
-        maxLongitude: positions[0][0],
-        minLatitude: positions[0][1],
-        maxLatitude: positions[0][1]
+        minLongitude: positions[0]?.[0] ? positions[0][0] : 0,
+        maxLongitude: positions[0]?.[0] ? positions[0][0] : 0,
+        minLatitude: positions[0]?.[1] ? positions[1][0] : 0,
+        maxLatitude: positions[0]?.[1] ? positions[1][0] : 0
       }
     );
 
