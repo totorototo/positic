@@ -4,7 +4,7 @@ exports[`path calculate path area 1`] = `
 Object {
   "maxLatitude": 45.55014,
   "maxLongitude": 6.30281,
-  "minLatitude": 45.06822,
+  "minLatitude": 5.77367,
   "minLongitude": 5.77311,
 }
 `;
@@ -78,6 +78,31 @@ Array [
 `;
 
 exports[`path get section between 10km and 40 km marks 1`] = `1086`;
+
+exports[`path should return default values 1`] = `
+Object {
+  "negative": 0,
+  "positive": 0,
+}
+`;
+
+exports[`path should return default values 2`] = `
+Object {
+  "negative": 0,
+  "positive": 0,
+}
+`;
+
+exports[`path should return default values 3`] = `0`;
+
+exports[`path should return default values 4`] = `
+Object {
+  "maxLatitude": 0,
+  "maxLongitude": 0,
+  "minLatitude": 0,
+  "minLongitude": 0,
+}
+`;
 
 exports[`path unable to get progression statistics 1`] = `
 Array [
