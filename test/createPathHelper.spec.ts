@@ -91,6 +91,24 @@ describe('path', () => {
     expect(statistics).toMatchSnapshot();
   });
 
+  it('should return default values', () => {
+    const data: Position[] = [];
+
+    const track = createTrack(data);
+
+    const computedElevation = track.getElevation();
+    expect(computedElevation).toMatchSnapshot();
+
+    const elevation = track.getElevation();
+    expect(elevation).toMatchSnapshot();
+
+    const length = track.getLength();
+    expect(length).toMatchSnapshot();
+
+    const bbox = track.getBoundingBox();
+    expect(bbox).toMatchSnapshot();
+  });
+
   it('get partial progression statistics', () => {
     const data: Position[] = [
       [5.77367, 45.07122],
